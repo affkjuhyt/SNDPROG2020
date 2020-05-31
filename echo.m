@@ -1,0 +1,17 @@
+clc;
+clear;
+pkg load signal;
+filename = 'echo.wav';
+[x, fs] = audioread('audio/Original/Crackling_Fire.wav', [44100 176400]);
+x = x * 3;
+xlen = length(x);
+s = x(:, 1);
+d = 75000;
+fs = 44100;
+xlen = length(x);
+t = zeros(size(x), 1);
+t(10) = 0.6;
+t(d) = 0.6;
+z = conv(s, t);
+plot(z);
+audiowrite(filename, x, fs);
